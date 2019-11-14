@@ -5,6 +5,7 @@ import subprocess
 import sys
 
 WHITE = (95.05, 100, 108.9)
+C_BG = 60
 
 
 def _srgb2rgb(c):
@@ -130,9 +131,12 @@ def permutate(a, n):
 def distance(color, i, offset=math.pi * 2 / 12):
 	hue = math.pi / 3 * i + offset
 	d = abs(color[2] - hue)
+	c = color[1]
+	if i in [0, 1]:
+		c = max(c, C_BG)
 	if d > math.pi:
 		d = 2 * math.pi - d
-	return d ** 2 * color[1]
+	return d ** 2 * c
 
 
 def score(colors):
@@ -148,12 +152,18 @@ def scheme(colors, dominant):
 
 	yield 2, c_grey, dominant[2]
 	for i in range(6):
-		yield l_dark[i], colors[i][1] * 1.2, colors[i][2]
+		c = colors[i][1] * 1.2
+		if i in [0, 1]:
+			c = max(c, C_BG)
+		yield l_dark[i], c, colors[i][2]
 	yield 90, c_grey, dominant[2]
 
 	yield 20, c_grey, dominant[2]
 	for i in range(6):
-		yield l_light[i], colors[i][1] * 1.2, colors[i][2]
+		c = colors[i][1] * 1.2
+		if i in [0, 1]:
+			c = max(c, C_BG)
+		yield l_light[i], c, colors[i][2]
 	yield 100, c_grey, dominant[2]
 
 
