@@ -105,9 +105,17 @@ def format_hex(rgb):
 
 
 def parse_hex(s):
-	r = int(s[1:3], 16)
-	g = int(s[3:5], 16)
-	b = int(s[5:7], 16)
+	s = s.lstrip('#')
+	if len(s) == 6:
+		r = int(s[0:2], 16)
+		g = int(s[2:4], 16)
+		b = int(s[4:6], 16)
+	elif len(s) == 3:
+		r = int(s[0], 16) * 17
+		g = int(s[1], 16) * 17
+		b = int(s[2], 16) * 17
+	else:
+		raise ValueError('Invalid hex color: %s' % s)
 	return r, g, b
 
 
