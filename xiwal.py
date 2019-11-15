@@ -193,9 +193,20 @@ def palette(scheme):
 	print(''.join(s[8:]))
 
 
+def parse_hex(s):
+	r = int(s[1:3], 16)
+	g = int(s[3:5], 16)
+	b = int(s[5:7], 16)
+	return r, g, b
+
+solarized = ['#002b36', '#eee8d5', '#b58900', '#cb4b16', '#dc322f', '#d33682', '#6c71c4', '#268bd2', '#2aa198', '#859900']
+gruvbox = ['#3c3836', '#cc241d', '#98971a', '#d79921', '#458588', '#b16286', '#689d6a', '#d65d0e']
+
+
 if __name__ == '__main__':
 	# foo
 	colors = list(im(sys.argv[1]))
+	# colors = [parse_hex(c) for c in gruvbox]
 	subprocess.call(['chafa', '-s', '40', sys.argv[1]])
 	scheme = colors2scheme(colors)
 	print(';'.join(scheme))
