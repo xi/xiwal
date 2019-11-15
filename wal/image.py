@@ -5,6 +5,7 @@ import subprocess
 def extract_colors(path, colors):
 	cmd = [
 		'convert', path,
+		'-resize', '25%',
 		'-alpha', 'deactivate',
 		'-colors', str(colors),
 		'-unique-colors',
