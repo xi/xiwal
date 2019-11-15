@@ -128,7 +128,7 @@ def permutate(a, n):
 				yield (a[i], *rest)
 
 
-def distance(color, i, offset=math.pi * 2 / 12):
+def distance(color, i, offset=math.pi * 2 / 15):
 	hue = math.pi / 3 * i + offset
 	d = abs(color[2] - hue)
 	c = color[1]
