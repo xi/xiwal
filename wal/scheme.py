@@ -2,9 +2,18 @@ import math
 
 from . import lch
 
-C_BG = 60
+# Minimum chroma for red/green (signal colors)
+C_RG = 60
+
+# lightness for dark/light colors
+# Some general guidelines:
+# - dark kcolors should have sufficient contrast to both black and white
+# - light colors should have different levels of lightness so they can
+#   easily be distinguished
 L_DARK = 45, 50, 50, 45, 45, 50
 L_LIGHT = 60, 70, 80, 60, 60, 75
+
+# hue for red reference color
 OFFSET = math.pi * 2 / 15
 
 
@@ -22,7 +31,7 @@ def distance(color, i):
 	d = abs(color[2] - hue)
 	c = color[1]
 	if i in [0, 1]:
-		c = max(c, C_BG)
+		c = max(c, C_RG)
 	if d > math.pi:
 		d = 2 * math.pi - d
 	return d ** 4 * c
@@ -41,7 +50,7 @@ def scheme(colors, dominant):
 	for i in range(6):
 		c = colors[i][1] * 1.2
 		if i in [0, 1]:
-			c = max(c, C_BG)
+			c = max(c, C_RG)
 		yield L_DARK[i], c, colors[i][2]
 	yield 85, c_grey, dominant[2]
 
@@ -49,7 +58,7 @@ def scheme(colors, dominant):
 	for i in range(6):
 		c = colors[i][1] * 1.2
 		if i in [0, 1]:
-			c = max(c, C_BG)
+			c = max(c, C_RG)
 		yield L_LIGHT[i], c, colors[i][2]
 	yield 100, c_grey, dominant[2]
 
