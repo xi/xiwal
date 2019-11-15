@@ -156,7 +156,7 @@ def scheme(colors, dominant):
 		if i in [0, 1]:
 			c = max(c, C_BG)
 		yield l_dark[i], c, colors[i][2]
-	yield 90, c_grey, dominant[2]
+	yield 85, c_grey, dominant[2]
 
 	yield 20, c_grey, dominant[2]
 	for i in range(6):
