@@ -1,4 +1,5 @@
 import math
+import functools
 
 from . import lch
 
@@ -33,24 +34,28 @@ def permutate(a, n):
 				yield (a[i], *rest)
 
 
+@functools.lru_cache(maxsize=32)
+def distance(color, i):
+	hue = math.pi / 3 * i + OFFSET
+	d = abs(color[2] - hue)
+	if d > math.pi:
+		d = 2 * math.pi - d
+
+	c = color[1]
+	if i in [0, 1]:
+		c = max(c, C_RG)
+
+	return d ** 4 * c, c
+
+
 def score(colors):
 	sum_score = 0
 	sum_chroma = 0
 
 	for i, color in enumerate(colors):
-		j = ORDER[i]
-
-		hue = math.pi / 3 * j + OFFSET
-		d = abs(color[2] - hue)
-		if d > math.pi:
-			d = 2 * math.pi - d
-
-		c = color[1]
-		if j in [0, 1]:
-			c = max(c, C_RG)
-
-		sum_score += d ** 4 * c
-		sum_chroma += c
+		score, chroma = distance(color, ORDER[i])
+		sum_score += score
+		sum_chroma += chroma
 
 	return sum_score / sum_chroma
 
