@@ -136,7 +136,7 @@ def distance(color, i, offset=math.pi * 2 / 15):
 		c = max(c, C_BG)
 	if d > math.pi:
 		d = 2 * math.pi - d
-	return d ** 2 * c
+	return d ** 4 * c
 
 
 def score(colors):
