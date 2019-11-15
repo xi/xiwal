@@ -10,8 +10,8 @@ C_RG = 60
 # - dark kcolors should have sufficient contrast to both black and white
 # - light colors should have different levels of lightness so they can
 #   easily be distinguished
-L_DARK = 45, 50, 50, 45, 45, 50
-L_LIGHT = 60, 70, 80, 60, 60, 75
+L_DARK = 2, 45, 50, 50, 45, 45, 50, 85
+L_LIGHT = 20, 60, 70, 80, 60, 60, 75, 100
 
 # hue for red reference color
 OFFSET = math.pi * 2 / 15
@@ -46,21 +46,21 @@ def score(colors):
 def scheme(colors, dominant):
 	c_grey = min(dominant[1], 8)
 
-	yield 2, c_grey, dominant[2]
+	yield L_DARK[0], c_grey, dominant[2]
 	for i in range(6):
 		c = colors[i][1] * 1.2
 		if i in [0, 1]:
 			c = max(c, C_RG)
-		yield L_DARK[i], c, colors[i][2]
-	yield 85, c_grey, dominant[2]
+		yield L_DARK[i + 1], c, colors[i][2]
+	yield L_DARK[7], c_grey, dominant[2]
 
-	yield 20, c_grey, dominant[2]
+	yield L_LIGHT[0], c_grey, dominant[2]
 	for i in range(6):
 		c = colors[i][1] * 1.2
 		if i in [0, 1]:
 			c = max(c, C_RG)
-		yield L_LIGHT[i], c, colors[i][2]
-	yield 100, c_grey, dominant[2]
+		yield L_LIGHT[i + 1], c, colors[i][2]
+	yield L_LIGHT[7], c_grey, dominant[2]
 
 
 def colors2scheme(colors):
