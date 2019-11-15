@@ -25,11 +25,11 @@ def main():
 	if len(colors) < 6:
 		sys.exit('Need at least 6 colors')
 
-	scheme = scheme.colors2scheme(colors)
+	s = scheme.colors2scheme(colors)
 
-	print(';'.join(scheme))
+	print(';'.join(s))
 	term.palette()
-	term.apply(scheme)
+	term.apply(s)
 
 
 if __name__ == '__main__':
