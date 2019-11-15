@@ -28,7 +28,7 @@ def main():
 	s = scheme.colors2scheme(colors)
 
 	print(';'.join(s))
-	term.palette()
+	term.palette(s)
 	term.apply(s)
 
 
