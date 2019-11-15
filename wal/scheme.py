@@ -5,6 +5,11 @@ from . import lch
 # Minimum chroma for red/green (signal colors)
 C_RG = 60
 
+# MAXIMUM chroma for greys
+C_GREY = 8
+
+C_FACTOR = 1.2
+
 # lightness for dark/light colors
 # Some general guidelines:
 # - dark kcolors should have sufficient contrast to both black and white
@@ -17,6 +22,7 @@ L_LIGHT = 20, 60, 70, 80, 60, 60, 75, 100
 OFFSET = math.pi * 2 / 15
 
 ORDER = [0, 2, 1, 4, 5, 3]
+
 
 def permutate(a, n):
 	if n == 0:
@@ -50,11 +56,11 @@ def score(colors):
 
 
 def scheme(colors, dominant):
-	c_grey = min(dominant[1], 8)
+	c_grey = min(dominant[1], C_GREY)
 
 	yield L_DARK[0], c_grey, dominant[2]
 	for i in range(6):
-		c = colors[i][1] * 1.2
+		c = colors[i][1] * C_FACTOR
 		if i in [0, 1]:
 			c = max(c, C_RG)
 		yield L_DARK[i + 1], c, colors[i][2]
@@ -62,7 +68,7 @@ def scheme(colors, dominant):
 
 	yield L_LIGHT[0], c_grey, dominant[2]
 	for i in range(6):
-		c = colors[i][1] * 1.2
+		c = colors[i][1] * C_FACTOR
 		if i in [0, 1]:
 			c = max(c, C_RG)
 		yield L_LIGHT[i + 1], c, colors[i][2]
@@ -73,4 +79,5 @@ def colors2scheme(colors):
 	colors = [lch.from_hex(c) for c in colors]
 	dominant = colors[0]
 	colors = min(permutate(colors, 6), key=score)
-	return [lch.to_hex(c) for c in scheme(colors, dominant)]
+	s = scheme(colors, dominant)
+	return [lch.to_hex(c) for c in s]
