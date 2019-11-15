@@ -16,6 +16,7 @@ L_LIGHT = 20, 60, 70, 80, 60, 60, 75, 100
 # hue for red reference color
 OFFSET = math.pi * 2 / 15
 
+ORDER = [0, 2, 1, 4, 5, 3]
 
 def permutate(a, n):
 	if n == 0:
@@ -26,21 +27,26 @@ def permutate(a, n):
 				yield (a[i], *rest)
 
 
-def distance(color, i):
-	hue = math.pi / 3 * i + OFFSET
-	d = abs(color[2] - hue)
-	c = color[1]
-	if i in [0, 1]:
-		c = max(c, C_RG)
-	if d > math.pi:
-		d = 2 * math.pi - d
-	return d ** 4 * c
-
-
 def score(colors):
-	s = sum(distance(c, i) for i, c in enumerate(colors))
-	s /= sum(c[1] for c in colors)
-	return s
+	sum_score = 0
+	sum_chroma = 0
+
+	for i, color in enumerate(colors):
+		j = ORDER[i]
+
+		hue = math.pi / 3 * j + OFFSET
+		d = abs(color[2] - hue)
+		if d > math.pi:
+			d = 2 * math.pi - d
+
+		c = color[1]
+		if j in [0, 1]:
+			c = max(c, C_RG)
+
+		sum_score += d ** 4 * c
+		sum_chroma += c
+
+	return sum_score / sum_chroma
 
 
 def scheme(colors, dominant):
@@ -67,5 +73,4 @@ def colors2scheme(colors):
 	colors = [lch.from_hex(c) for c in colors]
 	dominant = colors[0]
 	colors = min(permutate(colors, 6), key=score)
-	colors = [colors[i] for i in [0, 2, 1, 4, 5, 3]]
 	return [lch.to_hex(c) for c in scheme(colors, dominant)]
