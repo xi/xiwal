@@ -1,0 +1,19 @@
+import glob
+
+
+def apply(scheme):
+	for path in glob.glob('/dev/pts/[0-9]*'):
+		with open(path, 'w') as tty:
+			for i in range(0, 16):
+				tty.write('\033]4;%s;%s\033\\' % (i, scheme[i]))
+			tty.write('\033]%s;%s\033\\' % (11, scheme[0]))
+			tty.write('\033]%s;%s\033\\' % (10, scheme[15]))
+
+
+def palette():
+	s = []
+	for i in range(0, 16):
+		a = '8;5;%s' % i if i > 7 else i
+		s.append('\033[4%sm%s\033[0m' % (a, '   '))
+	print(''.join(s[:8]))
+	print(''.join(s[8:]))
