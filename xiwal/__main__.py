@@ -8,6 +8,7 @@ from . import term
 
 def parse_args():
 	parser = argparse.ArgumentParser()
+	parser.add_argument('--apply', '-a', action='store_true')
 	parser.add_argument('--image', '-i')
 	parser.add_argument('-n', type=int, default=8)
 	parser.add_argument('colors', nargs='*')
@@ -29,7 +30,8 @@ def main():
 
 	print(';'.join(s))
 	term.palette(s)
-	term.apply(s)
+	if args.apply:
+		term.apply(s)
 
 
 if __name__ == '__main__':
