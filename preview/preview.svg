@@ -1,0 +1,255 @@
+<?xml version="1.0"?>
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2048 2048">
+	<style>
+		@keyframes cycle1 {
+			0.0%  {fill: #c03843}
+			6.7%  {fill: #c03168}
+			13.3% {fill: #9f5800}
+			20.0% {fill: #bd3d32}
+			26.7% {fill: #b74429}
+			33.3% {fill: #8c50b1}
+			40.0% {fill: #ab5012}
+			46.7% {fill: #517500}
+			53.3% {fill: #8b6300}
+			60.0% {fill: #b64528}
+			66.7% {fill: #c13648}
+			73.3% {fill: #c13167}
+			80.0% {fill: #ce0078}
+			86.7% {fill: #bd3f0d}
+			93.3% {fill: #bc3e37}
+		}
+		@keyframes cycle2 {
+			0.0%  {fill: #6e7e00}
+			6.7%  {fill: #4c8500}
+			13.3% {fill: #6c7f00}
+			20.0% {fill: #827800}
+			26.7% {fill: #be5926}
+			33.3% {fill: #2076db}
+			40.0% {fill: #59830e}
+			46.7% {fill: #5a820d}
+			53.3% {fill: #5d8209}
+			60.0% {fill: #c05729}
+			66.7% {fill: #cd4a45}
+			73.3% {fill: #008766}
+			80.0% {fill: #008a2a}
+			86.7% {fill: #638102}
+			93.3% {fill: #2d882e}
+		}
+		@keyframes cycle3 {
+			0.0%  {fill: #967103}
+			6.7%  {fill: #837800}
+			13.3% {fill: #89735e}
+			20.0% {fill: #8c7438}
+			26.7% {fill: #767a4d}
+			33.3% {fill: #c34a8a}
+			40.0% {fill: #907054}
+			46.7% {fill: #63802f}
+			53.3% {fill: #877543}
+			60.0% {fill: #b06240}
+			66.7% {fill: #bd5942}
+			73.3% {fill: #ba5768}
+			80.0% {fill: #8f7400}
+			86.7% {fill: #a36a1b}
+			93.3% {fill: #8a7437}
+		}
+		@keyframes cycle4 {
+			0.0%  {fill: #446e8e}
+			6.7%  {fill: #40717c}
+			13.3% {fill: #716771}
+			20.0% {fill: #596e6f}
+			26.7% {fill: #656b70}
+			33.3% {fill: #4c6aa1}
+			40.0% {fill: #447270}
+			46.7% {fill: #5f6e58}
+			53.3% {fill: #626d60}
+			60.0% {fill: #8a55a0}
+			66.7% {fill: #7b646a}
+			73.3% {fill: #00767a}
+			80.0% {fill: #006eb5}
+			86.7% {fill: #007775}
+			93.3% {fill: #6e696a}
+		}
+		@keyframes cycle5 {
+			0.0%  {fill: #7f5e8a}
+			6.7%  {fill: #cd0e70}
+			13.3% {fill: #796563}
+			20.0% {fill: #856253}
+			26.7% {fill: #a44f62}
+			33.3% {fill: #805aa1}
+			40.0% {fill: #756859}
+			46.7% {fill: #5b6e6a}
+			53.3% {fill: #9b5b14}
+			60.0% {fill: #cc2821}
+			66.7% {fill: #995759}
+			73.3% {fill: #646b74}
+			80.0% {fill: #c7009b}
+			86.7% {fill: #a2552e}
+			93.3% {fill: #8d5c6f}
+		}
+		@keyframes cycle6 {
+			0.0%  {fill: #42817a}
+			6.7%  {fill: #328190}
+			13.3% {fill: #7c747f}
+			20.0% {fill: #6c7b5f}
+			26.7% {fill: #747774}
+			33.3% {fill: #6076a9}
+			40.0% {fill: #008582}
+			46.7% {fill: #687d53}
+			53.3% {fill: #2e8657}
+			60.0% {fill: #897169}
+			66.7% {fill: #6e768e}
+			73.3% {fill: #30837b}
+			80.0% {fill: #008390}
+			86.7% {fill: #3d8277}
+			93.3% {fill: #77738e}
+		}
+
+		@keyframes cycle9 {
+			0.0%  {fill: #ee6266}
+			6.7%  {fill: #ee5d8e}
+			13.3% {fill: #cd7d2b}
+			20.0% {fill: #ec6655}
+			26.7% {fill: #e56c4c}
+			33.3% {fill: #b576db}
+			40.0% {fill: #d97639}
+			46.7% {fill: #779c2b}
+			53.3% {fill: #b9881c}
+			60.0% {fill: #e46d4b}
+			66.7% {fill: #ef616c}
+			73.3% {fill: #ee5d8d}
+			80.0% {fill: #ff459f}
+			86.7% {fill: #ed6734}
+			93.3% {fill: #eb665a}
+		}
+		@keyframes cycle10 {
+			0.0%  {fill: #a5b33d}
+			6.7%  {fill: #72be0f}
+			13.3% {fill: #a2b43e}
+			20.0% {fill: #bbad36}
+			26.7% {fill: #fc8d57}
+			33.3% {fill: #84a9fe}
+			40.0% {fill: #8eb848}
+			46.7% {fill: #90b847}
+			53.3% {fill: #93b745}
+			60.0% {fill: #fe8c5a}
+			66.7% {fill: #fe897e}
+			73.3% {fill: #00c293}
+			80.0% {fill: #12c542}
+			86.7% {fill: #99b642}
+			93.3% {fill: #66be60}
+		}
+		@keyframes cycle11 {
+			0.0%  {fill: #eebf5b}
+			6.7%  {fill: #d9c842}
+			13.3% {fill: #dbc2ab}
+			20.0% {fill: #e1c282}
+			26.7% {fill: #c7c999}
+			33.3% {fill: #ffafd3}
+			40.0% {fill: #e4bfa0}
+			46.7% {fill: #b4d07a}
+			53.3% {fill: #dbc48e}
+			60.0% {fill: #ffb596}
+			66.7% {fill: #feb4a1}
+			73.3% {fill: #ffb2ba}
+			80.0% {fill: #eec100}
+			86.7% {fill: #fcb968}
+			93.3% {fill: #dec381}
+		}
+		@keyframes cycle12 {
+			0.0%  {fill: #6b95b6}
+			6.7%  {fill: #6798a3}
+			13.3% {fill: #988d98}
+			20.0% {fill: #7e9496}
+			26.7% {fill: #8b9197}
+			33.3% {fill: #7490ca}
+			40.0% {fill: #699996}
+			46.7% {fill: #85957d}
+			53.3% {fill: #889386}
+			60.0% {fill: #b37bc9}
+			66.7% {fill: #a38a90}
+			73.3% {fill: #00a0a5}
+			80.0% {fill: #4a94e0}
+			86.7% {fill: #329f9d}
+			93.3% {fill: #958f90}
+		}
+		@keyframes cycle13 {
+			0.0%  {fill: #a784b2}
+			6.7%  {fill: #fb4c96}
+			13.3% {fill: #a18b89}
+			20.0% {fill: #ad8878}
+			26.7% {fill: #cf7587}
+			33.3% {fill: #a880ca}
+			40.0% {fill: #9c8e7e}
+			46.7% {fill: #819490}
+			53.3% {fill: #c7803b}
+			60.0% {fill: #fc5743}
+			66.7% {fill: #c37d7e}
+			73.3% {fill: #8a919b}
+			80.0% {fill: #f842c6}
+			86.7% {fill: #ce7b51}
+			93.3% {fill: #b68196}
+		}
+		@keyframes cycle14 {
+			0.0%  {fill: #84c4bc}
+			6.7%  {fill: #79c3d4}
+			13.3% {fill: #bfb5c1}
+			20.0% {fill: #adbe9f}
+			26.7% {fill: #b6b9b6}
+			33.3% {fill: #a3b7ef}
+			40.0% {fill: #62c8c5}
+			46.7% {fill: #aabf92}
+			53.3% {fill: #73ca96}
+			60.0% {fill: #cdb3aa}
+			66.7% {fill: #afb8d1}
+			73.3% {fill: #76c6be}
+			80.0% {fill: #00cbdf}
+			86.7% {fill: #80c5b8}
+			93.3% {fill: #b9b5d2}
+		}
+
+		text {
+			font-weight: bold;
+			font-style: italic;
+			fill: #5b5b5b;
+		}
+		.bg {
+			fill: white;
+			stroke: black;
+		}
+		.c {
+			animation-duration: 10s;
+			animation-iteration-count: infinite;
+			animation-timing-function: step-end;
+		}
+		.c1  {animation-name: cycle1}
+		.c2  {animation-name: cycle2}
+		.c3  {animation-name: cycle3}
+		.c4  {animation-name: cycle4}
+		.c5  {animation-name: cycle5}
+		.c6  {animation-name: cycle6}
+		.c9  {animation-name: cycle9}
+		.c10 {animation-name: cycle10}
+		.c11 {animation-name: cycle11}
+		.c12 {animation-name: cycle12}
+		.c13 {animation-name: cycle13}
+		.c14 {animation-name: cycle14}
+	</style>
+
+	<rect x="0" y="0" width="2048" height="2048" stroke-width="3" class="bg" />
+	<g>
+		<rect x="89" y="85" width="313" height="704" class="c c1" />
+		<rect x="401" y="85" width="313" height="704" class="c c2" />
+		<rect x="713" y="85" width="313" height="704" class="c c3" />
+		<rect x="1025" y="85" width="313" height="704" class="c c4" />
+		<rect x="1337" y="85" width="313" height="704" class="c c5" />
+		<rect x="1649" y="85" width="313" height="704" class="c c6" />
+
+		<rect x="89" y="788" width="313" height="704" class="c c9" />
+		<rect x="401" y="788" width="313" height="704" class="c c10" />
+		<rect x="713" y="788" width="313" height="704" class="c c11" />
+		<rect x="1025" y="788" width="313" height="704" class="c c12" />
+		<rect x="1337" y="788" width="313" height="704" class="c c13" />
+		<rect x="1649" y="788" width="313" height="704" class="c c14" />
+	</g>
+	<text x="1961" y="1690" text-anchor="end" font-size="150">XIWAL</text>
+</svg>
