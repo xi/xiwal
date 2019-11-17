@@ -4,8 +4,8 @@
 Xiwal is a tool that generates color schemes from colors. The colors can either
 be specified directly or extracted from an image.
 
-It is massivly inspired by [pywal](https://github.com/dylanaraps/pywal), but it
-also has some important differences:
+It is massively inspired by [pywal](https://github.com/dylanaraps/pywal), but
+it also has some important differences:
 
 -   Xiwal focusses on terminal color schemes. There is no integration with gtk,
     i3, polybar, etc.
