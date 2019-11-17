@@ -1,10 +1,14 @@
+import os
 import glob
 
 from . import lch
 
 
-def apply(scheme):
-	for path in glob.glob('/dev/pts/[0-9]*'):
+def apply(scheme, cachefile='~/.cache/wal/sequences'):
+	cachefile = os.path.expanduser(cachefile)
+	os.makedirs(os.path.dirname(cachefile), exist_ok=True)
+
+	for path in [cachefile] + glob.glob('/dev/pts/[0-9]*'):
 		with open(path, 'w') as tty:
 			for i in range(0, 16):
 				tty.write('\033]4;%i;%s\033\\' % (i, scheme[i]))
