@@ -20,7 +20,7 @@ L_DARK = 2, 45, 50, 50, 45, 45, 50, 85
 L_LIGHT = 20, 60, 70, 80, 60, 60, 75, 100
 
 # hue for red reference color
-OFFSET = math.pi * 2 / 15
+OFFSET = math.pi * 2 / 14
 
 ORDER = [0, 2, 1, 4, 5, 3]
 
@@ -44,6 +44,7 @@ def distance(color, i):
 	c = color[1]
 	if i in [0, 1]:
 		c = max(c, C_RG)
+		d += (c - color[1]) / (c + color[1])
 
 	return d ** 4 * c, c
 
