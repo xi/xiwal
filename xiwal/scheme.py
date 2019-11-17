@@ -13,7 +13,7 @@ C_FACTOR = 1.2
 
 # lightness for dark/light colors
 # Some general guidelines:
-# - dark kcolors should have sufficient contrast to both black and white
+# - dark colors should have sufficient contrast to both black and white
 # - light colors should have different levels of lightness so they can
 #   easily be distinguished
 L_DARK = 2, 45, 50, 50, 45, 45, 50, 85
