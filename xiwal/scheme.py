@@ -36,7 +36,7 @@ def permutate(a, n):
 
 @functools.lru_cache(maxsize=32)
 def distance(color, i):
-	hue = math.pi / 3 * i + OFFSET
+	hue = math.pi / 3 * ORDER[i] + OFFSET
 	d = abs(color[2] - hue)
 	if d > math.pi:
 		d = 2 * math.pi - d
@@ -54,7 +54,7 @@ def score(colors):
 	sum_chroma = 0
 
 	for i, color in enumerate(colors):
-		score, chroma = distance(color, ORDER[i])
+		score, chroma = distance(color, i)
 		sum_score += score
 		sum_chroma += chroma
 
