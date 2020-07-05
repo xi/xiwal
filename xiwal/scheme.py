@@ -16,8 +16,8 @@ C_FACTOR = 1.2
 # - dark colors should have sufficient contrast to both black and white
 # - light colors should have different levels of lightness so they can
 #   easily be distinguished
-L_DARK = 2, 45, 50, 50, 45, 45, 50, 85
-L_LIGHT = 20, 60, 70, 80, 60, 60, 75, 100
+L_DARK = 2, 40, 55, 55, 45, 45, 50, 85
+L_LIGHT = 20, 55, 75, 80, 60, 60, 75, 100
 
 # hue for red reference color
 OFFSET = math.pi * 2 / 14
