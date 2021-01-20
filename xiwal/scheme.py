@@ -4,10 +4,10 @@ import functools
 from . import lch
 
 # Minimum chroma for red/green (signal colors)
-C_RG = 60
+C_RG = 0.15
 
 # MAXIMUM chroma for greys
-C_GREY = 8
+C_GREY = 0.02
 
 C_FACTOR = 1.2
 
@@ -16,8 +16,8 @@ C_FACTOR = 1.2
 # - dark colors should have sufficient contrast to both black and white
 # - light colors should have different levels of lightness so they can
 #   easily be distinguished
-L_DARK = 2, 40, 55, 55, 45, 45, 50, 85
-L_LIGHT = 20, 55, 75, 80, 60, 60, 75, 100
+L_DARK = 0.15, 0.50, 0.60, 0.60, 0.55, 0.55, 0.60, 0.90
+L_LIGHT = 0.30, 0.65, 0.75, 0.85, 0.65, 0.65, 0.80, 1.00
 
 # hue for red reference color
 OFFSET = math.pi * 2 / 14
