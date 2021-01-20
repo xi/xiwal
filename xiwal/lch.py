@@ -1,6 +1,9 @@
-import math
+"""Oklab color model.
 
-WHITE = (95.05, 100, 108.9)
+https://bottosson.github.io/posts/oklab/
+"""
+
+import math
 
 
 def _srgb2rgb(c):
@@ -9,11 +12,10 @@ def _srgb2rgb(c):
 		c = c / 12.92
 	else:
 		c = ((c + 0.055) / 1.055) ** 2.4
-	return c * 100
+	return c
 
 
 def _rgb2srgb(c):
-	c = c / 100.0
 	if c <= 0.0031308:
 		c = c * 12.92
 	else:
@@ -21,46 +23,42 @@ def _rgb2srgb(c):
 	return c * 255
 
 
-def _xyz2lab(t):
-	if t > 216.0 / 24389:
-		return t ** (1.0 / 3)
-	else:
-		return 841.0 / 108 * t + 4.0 / 29
-
-
-def _lab2xyz(t):
-	if t > 6.0 / 29:
-		return t ** 3
-	else:
-		return 108.0 / 841 * (t - 4.0 / 29)
-
-
 def rgb2lab(rgb):
 	r, g, b = map(_srgb2rgb, rgb)
 
-	x = _xyz2lab((0.4124 * r + 0.3576 * g + 0.1805 * b) / WHITE[0])
-	y = _xyz2lab((0.2126 * r + 0.7152 * g + 0.0722 * b) / WHITE[1])
-	z = _xyz2lab((0.0193 * r + 0.1192 * g + 0.9505 * b) / WHITE[2])
+	l = 0.4121656120 * r + 0.5362752080 * g + 0.0514575653 * b
+	m = 0.2118591070 * r + 0.6807189584 * g + 0.1074065790 * b
+	s = 0.0883097947 * r + 0.2818474174 * g + 0.6302613616 * b
 
-	l = 116 * y - 16
-	a = 500 * (x - y)
-	b = 200 * (y - z)
+	l_ = l ** (1 / 3)
+	m_ = m ** (1 / 3)
+	s_ = s ** (1 / 3)
 
-	return l, a, b
+	L = 0.2104542553 * l_ + 0.7936177850 * m_ - 0.0040720468 * s_
+	a = 1.9779984951 * l_ - 2.4285922050 * m_ + 0.4505937099 * s_
+	b = 0.0259040371 * l_ + 0.7827717662 * m_ - 0.8086757660 * s_
+
+	return L, a, b
 
 
 def lab2rgb(lab):
-	l, a, b = lab
+	L, a, b = lab
 
-	l = (l + 16) / 116.0
+	l_ = L + 0.3963377774 * a + 0.2158037573 * b
+	m_ = L - 0.1055613458 * a - 0.0638541728 * b
+	s_ = L - 0.0894841775 * a - 1.2914855480 * b
 
-	x = WHITE[0] * _lab2xyz(l + a / 500)
-	y = WHITE[1] * _lab2xyz(l)
-	z = WHITE[2] * _lab2xyz(l - b / 200)
+	l = l_ ** 3
+	m = m_ ** 3
+	s = s_ ** 3
 
-	r =  3.2406 * x - 1.5372 * y - 0.4986 * z
-	g = -0.9689 * x + 1.8758 * y + 0.0415 * z
-	b =  0.0557 * x - 0.2040 * y + 1.0570 * z
+	r = +4.0767245293 * l - 3.3072168827 * m + 0.2307590544 * s
+	g = -1.2681437731 * l + 2.6093323231 * m - 0.3411344290 * s
+	b = -0.0041119885 * l - 0.7034763098 * m + 1.7068625689 * s
+
+	r = max(0, min(1, r))
+	g = max(0, min(1, g))
+	b = max(0, min(1, b))
 
 	return tuple(map(_rgb2srgb, (r, g, b)))
 
