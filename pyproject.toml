@@ -1,0 +1,23 @@
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "xiwal"
+version = "0.0.0"
+description = "Generate terminal color schemes"
+readme = "README.md"
+license = {text = "MIT"}
+keywords = ["terminal", "colorscheme", "wal", "colorscheme-generator"]
+authors = [
+    {name = "Tobias Bengfort", email = "tobias.bengfort@posteo.de"}
+]
+
+[project.urls]
+Homepage = "https://github.com/xi/xiwal"
+
+[project.scripts]
+xiwal = "xiwal.__main__:main"
+
+[tool.setuptools]
+packages = ["xiwal"]
