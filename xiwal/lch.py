@@ -1,5 +1,9 @@
 """Oklab color model.
 
+rgb in range [0, 255]
+lab in range [0, 1]
+hue in range [-pi, pi]
+
 https://bottosson.github.io/posts/oklab/
 """
 
