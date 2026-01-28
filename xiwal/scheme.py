@@ -1,5 +1,4 @@
 import functools
-import itertools
 import math
 
 from . import lch
@@ -41,16 +40,40 @@ def distance(color, i):
     return d ** 4 * c, c
 
 
-def score(colors):
-    sum_score = 0
-    sum_chroma = 0
+def get_best_subset(colors, n):
+    # perf: skip some permutations based on their lowest possible score
+    pos = 0
+    indices = [0] * n
+    dists = [0] * n
+    weights = [1] * n
+    best_score = math.inf
+    best_colors = None
+    while True:
+        dists[pos], weights[pos] = distance(colors[indices[pos]], pos)
+        score = sum(dists) / sum(weights)
 
-    for i, color in enumerate(colors):
-        score, chroma = distance(color, i)
-        sum_score += score
-        sum_chroma += chroma
+        if score < best_score and pos + 1 == n:
+            best_score = score
+            best_colors = [colors[i] for i in indices]
 
-    return sum_score / sum_chroma
+        if score < best_score and pos + 1 < n:
+            pos += 1
+        else:
+            indices[pos] += 1
+
+        while True:
+            if indices[pos] == len(colors):
+                if pos == 0:
+                    return best_colors
+                indices[pos] = 0
+                dists[pos] = 0
+                weights[pos] = 1
+                pos -= 1
+                indices[pos] += 1
+            elif indices[pos] in indices[:pos]:
+                indices[pos] += 1
+            else:
+                break
 
 
 def scheme(colors, dominant):
@@ -76,6 +99,6 @@ def scheme(colors, dominant):
 def colors2scheme(colors):
     colors = [lch.from_hex(c) for c in colors]
     dominant = colors[0]
-    colors = min(itertools.permutations(colors, 6), key=score)
-    s = scheme(colors, dominant)
+    subset = get_best_subset(colors, 6)
+    s = scheme(subset, dominant)
     return [lch.to_hex(c) for c in s]
