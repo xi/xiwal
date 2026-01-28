@@ -1,4 +1,5 @@
 import functools
+import itertools
 import math
 
 from . import lch
@@ -23,15 +24,6 @@ L_LIGHT = 0.30, 0.65, 0.75, 0.85, 0.65, 0.65, 0.80, 1.00
 OFFSET = math.pi * 2 / 14
 
 ORDER = [0, 2, 1, 4, 5, 3]
-
-
-def permutate(a, n):
-    if n == 0:
-        yield ()
-    else:
-        for i in range(len(a)):
-            for rest in permutate(a[:i] + a[i + 1:], n - 1):
-                yield (a[i], *rest)
 
 
 @functools.lru_cache(maxsize=32)
@@ -84,6 +76,6 @@ def scheme(colors, dominant):
 def colors2scheme(colors):
     colors = [lch.from_hex(c) for c in colors]
     dominant = colors[0]
-    colors = min(permutate(colors, 6), key=score)
+    colors = min(itertools.permutations(colors, 6), key=score)
     s = scheme(colors, dominant)
     return [lch.to_hex(c) for c in s]
