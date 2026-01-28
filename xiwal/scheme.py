@@ -25,7 +25,7 @@ OFFSET = math.pi * 2 / 14
 ORDER = [0, 2, 1, 4, 5, 3]
 
 
-@functools.lru_cache(maxsize=32)
+@functools.cache
 def distance(color, i):
     hue = math.pi / 3 * ORDER[i] + OFFSET
     d = abs(color[2] - hue)
