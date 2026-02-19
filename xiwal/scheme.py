@@ -103,10 +103,43 @@ def _colors2scheme(colors):
     return list(scheme(subset, dominant))
 
 
+def get_primary(black, white, dark, light):
+    """Find a primary so that dark and light can be mixed from it."""
+
+    l, c, h = lch.mix(dark, light, 0.5)
+
+    try:
+        l = (
+            (
+                (white[1] - black[1]) * (dark[0] - black[0]) * (light[0] - white[0])
+                + (dark[1] - black[1]) * (light[0] - white[0]) * black[0]
+                - (light[1] - white[1]) * (dark[0] - black[0]) * white[0]
+            ) / (
+                (dark[1] - black[1]) * (light[0] - white[0])
+                - (light[1] - white[1]) * (dark[0] - black[0])
+            )
+        )
+        l = min(max(l, dark[0]), light[0])
+    except ZeroDivisionError:
+        pass
+
+    try:
+        c = black[1] + (dark[1] - black[1]) * (l - black[0]) / (dark[0] - black[0])
+        c = min(max(c, dark[1], light[1]), 1)
+    except ZeroDivisionError:
+        pass
+
+    return l, c, h
+
+
 def expand_to_256(s):
     # https://github.com/jake-stewart/color256/
     full = [*s]
-    base8 = [s[0], *[s[i] for i in range(1, 7)], s[15]]
+    base8 = [
+        s[0],
+        *[get_primary(s[0], s[15], s[i], s[i + 8]) for i in range(1, 7)],
+        s[15],
+    ]
 
     for r in range(6):
         c0 = lch.mix(base8[0], base8[1], r / 5)
