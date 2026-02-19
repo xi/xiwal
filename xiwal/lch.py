@@ -134,7 +134,7 @@ def parse_hex(s):
         g = int(s[1], 16) * 17
         b = int(s[2], 16) * 17
     else:
-        raise ValueError('Invalid hex color: %s' % s)
+        raise ValueError(f'Invalid hex color: {s}')
     return r, g, b
 
 

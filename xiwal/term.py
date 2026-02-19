@@ -11,16 +11,16 @@ def apply(scheme, cachefile='~/.cache/wal/sequences'):
     for path in [cachefile, *glob.glob('/dev/pts/[0-9]*')]:
         with open(path, 'w') as tty:
             for i in range(16):
-                tty.write('\033]4;%i;%s\033\\' % (i, scheme[i]))
-            tty.write('\033]%i;%s\033\\' % (11, scheme[0]))
-            tty.write('\033]%i;%s\033\\' % (10, scheme[15]))
+                tty.write(f'\033]4;{i};{scheme[i]}\033\\')
+            tty.write(f'\033]11;{scheme[0]}\033\\')
+            tty.write(f'\033]10;{scheme[15]}\033\\')
 
 
 def palette(scheme):
     s = []
     for i in range(16):
         r, g, b = lch.parse_hex(scheme[i])
-        s.append('\033[48;2;%i;%i;%im    \033[0m' % (r, g, b))
+        s.append(f'\033[48;2;{r};{g};{b}m    \033[0m')
     print(''.join(s[:8]))
     print(''.join(s[8:]))
 
@@ -35,7 +35,7 @@ def palette_256(scheme):
         for z in range(6):
             for x in range(6):
                 r, g, b = lch.parse_hex(scheme[16 + 36 * y + 6 * z + x])
-                line.append('\033[48;2;%i;%i;%im    \033[0m' % (r, g, b))
+                line.append(f'\033[48;2;{r};{g};{b}m    \033[0m')
             line.append('  ')
         print(''.join(line))
 
@@ -44,5 +44,5 @@ def palette_256(scheme):
     line = []
     for i in range(24):
         r, g, b = lch.parse_hex(scheme[232 + i])
-        line.append('\033[48;2;%i;%i;%im    \033[0m' % (r, g, b))
+        line.append(f'\033[48;2;{r};{g};{b}m    \033[0m')
     print(''.join(line))
