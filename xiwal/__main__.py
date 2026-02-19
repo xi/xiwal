@@ -10,6 +10,7 @@ def parse_args():
     parser = argparse.ArgumentParser()
     parser.add_argument('--apply', '-a', action='store_true')
     parser.add_argument('--image', '-i')
+    parser.add_argument('--256', action='store_true', dest='full')
     parser.add_argument('-n', type=int, default=8)
     parser.add_argument('colors', nargs='*')
     return parser.parse_args()
@@ -26,10 +27,13 @@ def main():
     if len(colors) < 6:
         sys.exit('Need at least 6 colors')
 
-    s = scheme.colors2scheme(colors)
+    s = scheme.colors2scheme(colors, full_256=args.full)
 
     print(';'.join(s))
-    term.palette(s)
+    if args.full:
+        term.palette_256(s)
+    else:
+        term.palette(s)
     if args.apply:
         term.apply(s)
 

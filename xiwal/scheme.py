@@ -96,9 +96,39 @@ def scheme(colors, dominant):
     yield L_LIGHT[7], c_grey, dominant[2]
 
 
-def colors2scheme(colors):
+def _colors2scheme(colors):
     colors = [lch.from_hex(c) for c in colors]
     dominant = colors[0]
     subset = get_best_subset(colors, 6)
-    s = scheme(subset, dominant)
+    return list(scheme(subset, dominant))
+
+
+def expand_to_256(s):
+    # https://github.com/jake-stewart/color256/
+    full = [*s]
+    base8 = [s[0], *[s[i] for i in range(1, 7)], s[15]]
+
+    for r in range(6):
+        c0 = lch.mix(base8[0], base8[1], r / 5)
+        c1 = lch.mix(base8[2], base8[3], r / 5)
+        c2 = lch.mix(base8[4], base8[5], r / 5)
+        c3 = lch.mix(base8[6], base8[7], r / 5)
+        for g in range(6):
+            c4 = lch.mix(c0, c1, g / 5)
+            c5 = lch.mix(c2, c3, g / 5)
+            for b in range(6):
+                c6 = lch.mix(c4, c5, b / 5)
+                full.append(c6)
+
+    for i in range(24):
+        c = lch.mix(base8[0], base8[7], (i + 1) / 25)
+        full.append(c)
+
+    return full
+
+
+def colors2scheme(colors, *, full_256=False):
+    s = _colors2scheme(colors)
+    if full_256:
+        s = expand_to_256(s)
     return [lch.to_hex(c) for c in s]
