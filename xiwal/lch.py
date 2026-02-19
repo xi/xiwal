@@ -121,7 +121,11 @@ def format_hex(rgb):
 
 def parse_hex(s):
     s = s.lstrip('#')
-    if len(s) == 6:
+    if len(s) == 12:
+        r = int(s[0:4], 16) / 257
+        g = int(s[4:8], 16) / 257
+        b = int(s[8:12], 16) / 257
+    elif len(s) == 6:
         r = int(s[0:2], 16)
         g = int(s[2:4], 16)
         b = int(s[4:6], 16)
