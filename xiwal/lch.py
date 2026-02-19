@@ -67,8 +67,8 @@ def lab2rgb(lab):
     return tuple(map(_rgb2srgb, (r, g, b)))
 
 
-def rgb2lch(rgb):
-    l, a, b = rgb2lab(rgb)
+def lab2lch(lab):
+    l, a, b = lab
     c = (a ** 2 + b ** 2) ** 0.5
     h = 0
     if abs(a) > 0.0001 or abs(b) > 0.0001:
@@ -77,11 +77,19 @@ def rgb2lch(rgb):
     return l, c, h
 
 
-def _lch2rgb(lch):
+def lch2lab(lch):
     l, c, h = lch
     a = math.cos(h) * c
     b = math.sin(h) * c
-    return lab2rgb((l, a, b))
+    return l, a, b
+
+
+def rgb2lch(rgb):
+    return lab2lch(rgb2lab(rgb))
+
+
+def _lch2rgb(lch):
+    return lab2rgb(lch2lab(lch))
 
 
 def lch2rgb(lch):
@@ -98,6 +106,13 @@ def lch2rgb(lch):
             c_min = c_tmp
 
     return rgb
+
+
+def mix(lch1, lch2, t):
+    # mixing hue is hard, so we mix in lab instead
+    return lab2lch([x + t * (y - x) for x, y in zip(
+        lch2lab(lch1), lch2lab(lch2), strict=True
+    )])
 
 
 def format_hex(rgb):
