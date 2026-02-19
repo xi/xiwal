@@ -86,18 +86,16 @@ def _lch2rgb(lch):
 
 def lch2rgb(lch):
     rgb = _lch2rgb(lch)
+    c_min = 0
+    c_max = lch[1]
 
-    if any(x < 0 or x > 255 for x in rgb):
-        c_min = 0
-        c_max = lch[1]
-
-        while c_max - c_min > 0.01:
-            c_tmp = (c_min + c_max) / 2
-            rgb = _lch2rgb((lch[0], c_tmp, lch[2]))
-            if any(x < 0 or x > 255 for x in rgb):
-                c_max = c_tmp
-            else:
-                c_min = c_tmp
+    while c_max - c_min > 0.01:
+        c_tmp = (c_min + c_max) / 2
+        rgb = _lch2rgb((lch[0], c_tmp, lch[2]))
+        if any(x < 0 or x > 255 for x in rgb):
+            c_max = c_tmp
+        else:
+            c_min = c_tmp
 
     return rgb
 
